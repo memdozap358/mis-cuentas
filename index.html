@@ -2,43 +2,119 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mi Bóveda Personal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ La Boveda Oni-chan ✨</title>
     <style>
-        body { background: #000; color: #00ff88; font-family: sans-serif; text-align: center; padding-top: 50px; }
-        .box { background: #111; border: 1px solid #333; padding: 20px; border-radius: 15px; display: inline-block; width: 300px; }
-        input { width: 80%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
-        button { background: #00ff88; color: black; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .secreto { display: none; } /* Esto esconde tus datos al principio */
+        /* Fondo con colores suaves y degradado */
+        body { 
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* El cuadrado del centro con bordes redondeados */
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid #fff;
+        }
+
+        h2 { color: #ff8fab; margin-bottom: 20px; font-size: 1.5rem; }
+        p { color: #888; font-size: 0.9rem; }
+
+        /* Estilo del input (donde pones la clave) */
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border: 2px solid #ffe5ec;
+            outline: none;
+            background: #fffafa;
+            text-align: center;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input:focus { border-color: #ffb3c1; }
+
+        /* Botón bonito */
+        button {
+            background: #ffb3c1;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        button:hover { background: #ff8fab; transform: scale(1.02); }
+
+        /* Estilo para los datos cuando entras */
+        .secreto { display: none; }
+        .dato-box {
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            text-align: left;
+            border-left: 5px solid #ffb3c1;
+        }
+        .cerrar-btn { background: #ccc; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <div id="login">
-        <h2>🔒 Acceso Único</h2>
-        <input type="password" id="pass" placeholder="Tu Clave Maestra">
-        <br>
-        <button onclick="entrar()">ENTRAR</button>
+    <div id="login" class="card">
+        <h2>🌸 ¡Hola!</h2>
+        <p>onichan mete tu llave aqui para abrirte mi interior</p>
+        <input type="password" id="pass" placeholder="Tu llave secreta...">
+        <button onclick="entrar()">ABRIR ✨</button>
     </div>
 
-    <div id="mi-boveda" class="secreto">
-        <h2>🔑 Mis Cuentas</h2>
-        <div class="box">
-            <p><strong>🎮 ROBLOX:</strong> usuario / clave</p>
-            <p><strong>📧 GMAIL:</strong> correo@gmail.com / clave</p>
-            <p><strong>📸 TIKTOK:</strong> @usuario / clave</p>
+    <div id="mi-boveda" class="card secreto">
+        <h2>🔑 Mis Secretos</h2>
+        
+        <div class="dato-box">
+            <strong>🎮 ROBLOX</strong><br>
+            <span>User: tu_usuario | Pass: tu_clave</span>
         </div>
-        <br><br>
-        <button onclick="location.reload()" style="background: red; color: white;">CERRAR</button>
+
+        <div class="dato-box" style="border-left-color: #bde0fe;">
+            <strong>📧 GMAIL</strong><br>
+            <span>correo@gmail.com | clave123</span>
+        </div>
+
+        <div class="dato-box" style="border-left-color: #cdb4db;">
+            <strong>📸 TIKTOK</strong><br>
+            <span>@usuario | password</span>
+        </div>
+
+        <button class="cerrar-btn" onclick="location.reload()">CERRAR TODO</button>
     </div>
 
     <script>
         function entrar() {
             var clave = document.getElementById("pass").value;
-            if (clave === "1234") { // <--- AQUÍ CAMBIA "1234" POR TU CLAVE
+            // CAMBIA "904369662" por tu clave favorita
+            if (clave === "904369662") { 
                 document.getElementById("login").style.display = "none";
                 document.getElementById("mi-boveda").style.display = "block";
             } else {
-                alert("Clave incorrecta");
+                alert("Onichan... no me lastimes con la llave incorrecta ❌");
             }
         }
     </script>
