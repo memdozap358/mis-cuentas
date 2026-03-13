@@ -5,34 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⚡ Nakama Vault Pro: Blindado ⚡</title>
     <style>
-    body { 
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* IMAGEN DE RESPALDO SI FALLA EL LINK */
-        background-color: #000; 
-        /* NUEVO LINK DIRECTO Y ESTABLE */
-        background-image: url('https://images.alphacoders.com/132/1322550.png');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-attachment: fixed;
-        background-size: cover;
-        font-family: 'Segoe UI', sans-serif;
-        color: white;
-    }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0;
+            
+            /* FONDO REFORZADO CON IMAGEN DE ONE PIECE GEAR 5 */
+            background-color: #000;
+            background-image: url('https://wallpapercave.com/wp/wp12015502.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            
+            color: white; 
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    /* CAPA PARA QUE EL TEXTO SE VEA CLARO */
-    body::before { 
-        content: ""; 
-        position: fixed; 
-        top: 0; left: 0; width: 100%; height: 100%; 
-        background: rgba(0, 0, 0, 0.6); 
-        z-index: -1; 
-    }
-</style>
+        /* Capa de contraste mejorada */
+        body::before { 
+            content: ""; 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0, 0, 0, 0.7); 
+            z-index: -1; 
+        }
+        
+        .card { 
+            position: relative;
+            background: rgba(10, 10, 10, 0.95); 
+            padding: 30px; border-radius: 20px; text-align: center; 
+            border: 2px solid #ff0000; box-shadow: 0 0 30px rgba(255, 0, 0, 0.7); 
+            width: 90%; max-width: 800px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+        
+        #login-screen { width: 350px; }
+        
+        input { 
+            width: 80%; padding: 12px; margin-bottom: 20px; 
+            border-radius: 8px; border: 1px solid #444; 
+            background: #000; color: #ff0000; text-align: center; 
+            font-size: 1.2rem; font-weight: bold; outline: none; 
+        }
+        
+        .main-btn { 
+            background: #ff0000; color: white; border: none; 
+            padding: 12px 25px; border-radius: 8px; width: 85%; 
+            font-weight: bold; cursor: pointer; text-transform: uppercase; 
+        }
+
+        #dashboard-screen { display: none; }
+        
+        .menu-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); 
+            gap: 12px; margin: 20px 0; 
+        }
+
+        .menu-btn { 
+            background: rgba(20, 20, 20, 0.8); color: #ff0000; 
+            border: 1px solid #ff0000; padding: 12px; 
+            border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.75rem;
+            transition: 0.3s; text-transform: uppercase;
+        }
+
+        .menu-btn:hover, .menu-btn.active { background: #ff0000; color: white; }
+
+        .seccion-cuentas { 
+            display: none; text-align: left; max-height: 50vh; 
+            overflow-y: auto; margin-top: 20px; border-top: 1px solid #333; 
+            padding: 20px 5px;
+        }
+
+        .visible { display: block; }
+        
+        .dato-box { 
+            background: rgba(30, 0, 0, 0.3); padding: 12px; 
+            border-radius: 8px; margin-bottom: 10px; 
+            border-left: 4px solid #ff0000; font-size: 0.9rem;
+            display: flex; justify-content: space-between;
+            border-right: 1px solid #222;
+        }
+
+        .dato-box strong { color: #ff404f; min-width: 90px; }
+        .dato-box span { color: #ccc; }
+        .key-tag { color: #f1c40f; font-weight: bold; text-shadow: 0 0 5px #f1c40f; }
+
+        .cerrar-btn { 
+            background: #660000; color: white; border: none; 
+            padding: 12px; border-radius: 8px; width: 100%; 
+            cursor: pointer; margin-top: 20px; font-weight: bold; text-transform: uppercase;
+        }
+        
+        .seccion-cuentas::-webkit-scrollbar { width: 6px; }
+        .seccion-cuentas::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); border-radius: 10px; }
+        .seccion-cuentas::-webkit-scrollbar-thumb { background: #ff0000; border-radius: 10px; }
+    </style>
 </head>
 <body>
 
@@ -300,4 +370,3 @@
     </script>
 </body>
 </html>
-
