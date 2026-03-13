@@ -3,33 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Nakama Vault: Gear Red ⚡</title>
+    <title>⚡ Nakama Vault Pro: Manual Red ⚡</title>
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif;
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; margin: 0;
-            background: #000 url('https://images.alphacoders.com/129/1291196.png') no-repeat center center fixed;
+            /* NUEVO FONDO ESTABLE GEAR 5 */
+            background: #000 url('https://w0.peakpx.com/wallpaper/1018/614/HD-wallpaper-gear-5-luffy-one-piece.jpg') no-repeat center center fixed;
             background-size: cover; color: white; overflow: hidden;
         }
-        body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: -1; }
-        .card { background: rgba(10, 10, 10, 0.9); padding: 30px; border-radius: 20px; text-align: center; border: 2px solid #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.6); box-sizing: border-box; }
-        #login-screen { width: 350px; height: 350px; display: flex; flex-direction: column; justify-content: center; }
-        #login-screen h2 { color: #ff0000; text-shadow: 0 0 10px #ff0000; margin: 0; }
-        #login-screen p { font-size: 0.85rem; color: #bbb; margin: 10px 0 20px 0; }
-        input { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: rgba(0, 0, 0, 0.8); color: #ff0000; text-align: center; font-size: 1.1rem; font-weight: bold; outline: none; box-sizing: border-box; }
-        .main-btn { background: #ff0000; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        #dashboard-screen { display: none; width: 95%; max-width: 650px; }
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
-        .menu-btn { background: transparent; color: #ff0000; border: 1px solid #ff0000; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.75rem; transition: 0.3s; }
-        .menu-btn:hover { background: #ff0000; color: white; }
-        .seccion-cuentas { display: none; text-align: left; max-height: 45vh; overflow-y: auto; padding-right: 10px; margin-top: 15px; }
+        body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: -1; }
+        
+        /* Contenedor Principal */
+        .card { 
+            background: rgba(10, 10, 10, 0.95); 
+            padding: 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            border: 2px solid #ff0000; /* ROJO ELÉCTRICO */
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.7); 
+            box-sizing: border-box; 
+        }
+        
+        /* Login Cuadrado y Compacto */
+        #login-screen { width: 350px; height: 350px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        #login-screen h2 { color: #ff0000; text-shadow: 0 0 10px #ff0000; margin: 0; font-size: 1.8rem;}
+        #login-screen p { font-size: 0.85rem; color: #bbb; margin: 10px 0 25px 0; }
+        
+        input { 
+            width: 85%; padding: 12px; margin-bottom: 25px; 
+            border-radius: 8px; border: 1px solid #444; 
+            background: rgba(0, 0, 0, 0.9); color: #ff0000; 
+            text-align: center; font-size: 1.2rem; font-weight: bold; 
+            outline: none; box-sizing: border-box; 
+        }
+        input:focus { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
+        
+        .main-btn { 
+            background: #ff0000; color: white; border: none; 
+            padding: 12px 25px; border-radius: 8px; width: 85%; 
+            font-weight: bold; cursor: pointer; text-transform: uppercase; 
+            transition: 0.3s;
+        }
+        .main-btn:hover { background: #cc0000; transform: scale(1.05); }
+
+        /* Dashboard Flexible */
+        #dashboard-screen { display: none; width: 95%; max-width: 700px; padding: 25px; }
+        #dashboard-screen h2 { color: #f1c40f; text-shadow: 0 0 10px #f1c40f; margin-bottom: 20px; }
+        
+        /* Menú Grid con Iconos */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin: 20px 0; }
+        .menu-btn { 
+            background: rgba(20, 20, 20, 0.8); color: #ff0000; 
+            border: 1px solid #ff0000; padding: 12px; 
+            border-radius: 8px; cursor: pointer; font-weight: bold; 
+            font-size: 0.75rem; transition: 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+        }
+        .menu-btn:hover, .menu-btn.active { background: #ff0000; color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4); }
+
+        /* Listado de Cuentas Manuales */
+        .seccion-cuentas { display: none; text-align: left; max-height: 50vh; overflow-y: auto; padding-right: 12px; margin-top: 20px; border-top: 1px solid #333; padding-top: 15px;}
+        .seccion-cuentas h3 { margin-top: 0; display: flex; align-items: center; gap: 8px; }
         .visible { display: block; }
-        .dato-box { background: rgba(30, 0, 0, 0.4); padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #ff0000; font-size: 0.85rem; }
+        
+        .dato-box { 
+            background: rgba(30, 0, 0, 0.3); 
+            padding: 12px; 
+            border-radius: 8px; 
+            margin-bottom: 8px; 
+            border-left: 4px solid #ff0000; 
+            font-size: 0.85rem; 
+            transition: 0.2s;
+            border-right: 1px solid #222;
+        }
+        .dato-box:hover { background: rgba(50, 0, 0, 0.5); }
         .dato-box strong { color: #ff0000; }
-        .key-tag { color: #f1c40f; font-weight: bold; }
-        .cerrar-btn { background: #660000; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer; margin-top: 20px;}
-        .seccion-cuentas::-webkit-scrollbar { width: 4px; }
+        
+        /* Estilos específicos para ROBLOX y KEY */
+        .key-tag { color: #f1c40f; font-weight: bold; text-shadow: 0 0 5px #f1c40f; }
+        .roblox-box { border-left-color: #f1c40f; }
+        .roblox-box strong { color: #f1c40f; }
+
+        .cerrar-btn { background: #660000; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; cursor: pointer; margin-top: 25px; font-weight: bold; text-transform: uppercase; transition: 0.3s;}
+        .cerrar-btn:hover { background: #880000; }
+        
+        /* Scrollbar Roja Personalizada */
+        .seccion-cuentas::-webkit-scrollbar { width: 6px; }
+        .seccion-cuentas::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); border-radius: 10px; }
         .seccion-cuentas::-webkit-scrollbar-thumb { background: #ff0000; border-radius: 10px; }
     </style>
 </head>
@@ -43,92 +104,259 @@
     </div>
 
     <div id="dashboard-screen" class="card">
-        <h2 style="color: #f1c40f;">💎 MIS TESOROS</h2>
+        <h2>💎 MIS TESOROS</h2>
+        
         <div class="menu-grid">
-            <button class="menu-btn" onclick="mostrar('roblox')">🎮 ROBLOX</button>
-            <button class="menu-btn" onclick="mostrar('tiktok')">📱 TIKTOK</button>
-            <button class="menu-btn" onclick="mostrar('facebook')">👥 FB</button>
-            <button class="menu-btn" onclick="mostrar('instagram')">📸 INSTA</button>
-            <button class="menu-btn" onclick="mostrar('gmail')">📧 GMAIL</button>
-            <button class="menu-btn" onclick="mostrar('otros')">➕ OTROS</button>
+            <button class="menu-btn" onclick="mostrar('roblox')">🎮<br>ROBLOX</button>
+            <button class="menu-btn" onclick="mostrar('tiktok')">📱<br>TIKTOK</button>
+            <button class="menu-btn" onclick="mostrar('facebook')">👥<br>FB</button>
+            <button class="menu-btn" onclick="mostrar('instagram')">📸<br>INSTA</button>
+            <button class="menu-btn" onclick="mostrar('gmail')">📧<br>GMAIL</button>
+            <button class="menu-btn" onclick="mostrar('otros')">➕<br>OTROS</button>
         </div>
 
-        <div id="roblox" class="seccion-cuentas">
-            <h3 style="color:#ff0000">🎮 ROBLOX</h3>
-            <div class="dato-box"><strong>ACC 1:</strong> CORREO: --- | PASS: --- | <span class="key-tag">KEY: SI</span></div>
-            <div class="dato-box"><strong>ACC 2:</strong> CORREO: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
-            <div id="roblox-list"></div> </div>
+        <div id="roblox" class="seccion-cuentas roblox-section">
+            <h3 style="color:#f1c40f">🎮 ROBLOX (Key Check)</h3>
+            <div class="dato-box roblox-box"><strong>ACC 1:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: SI</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 2:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 3:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 4:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 5:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 6:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 7:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 8:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 9:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 10:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 11:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 12:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 13:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 14:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 15:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 16:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 17:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 18:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 19:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 20:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 21:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 22:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 23:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 24:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 25:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 26:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 27:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 28:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 29:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div class="dato-box roblox-box"><strong>ACC 30:</strong> CORREOS: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+        </div>
 
         <div id="tiktok" class="seccion-cuentas">
-            <h3 style="color:#ff0000">📱 TIKTOK</h3>
-            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
-            <div class="dato-box"><strong>CUENTA 2:</strong> CORREO: --- | PASS: ---</div>
-            <div id="tiktok-list"></div>
+            <h3>📱 TIKTOK</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 2:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 3:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 4:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 5:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 6:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 7:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 8:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 9:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 10:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 11:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 12:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 13:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 14:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 15:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 16:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 17:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 18:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 19:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 20:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 21:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 22:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 23:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 24:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 25:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 26:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 27:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 28:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 29:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 30:</strong> CORREOS: --- | PASS: ---</div>
         </div>
 
         <div id="facebook" class="seccion-cuentas">
-            <h3 style="color:#ff0000">👥 FACEBOOK</h3>
-            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
-            <div id="facebook-list"></div>
+            <h3>👥 FACEBOOK</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 2:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 3:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 4:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 5:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 6:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 7:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 8:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 9:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 10:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 11:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 12:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 13:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 14:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 15:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 16:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 17:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 18:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 19:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 20:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 21:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 22:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 23:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 24:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 25:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 26:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 27:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 28:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 29:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 30:</strong> CORREOS: --- | PASS: ---</div>
         </div>
 
         <div id="instagram" class="seccion-cuentas">
-            <h3 style="color:#ff0000">📸 INSTAGRAM</h3>
-            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
-            <div id="instagram-list"></div>
+            <h3>📸 INSTAGRAM</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 2:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 3:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 4:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 5:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 6:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 7:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 8:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 9:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 10:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 11:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 12:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 13:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 14:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 15:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 16:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 17:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 18:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 19:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 20:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 21:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 22:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 23:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 24:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 25:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 26:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 27:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 28:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 29:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 30:</strong> CORREOS: --- | PASS: ---</div>
         </div>
 
         <div id="gmail" class="seccion-cuentas">
-            <h3 style="color:#ff0000">📧 GMAIL</h3>
-            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
-            <div id="gmail-list"></div>
+            <h3>📧 GMAIL</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 2:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 3:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 4:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 5:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 6:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 7:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 8:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 9:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 10:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 11:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 12:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 13:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 14:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 15:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 16:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 17:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 18:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 19:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 20:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 21:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 22:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 23:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 24:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 25:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 26:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 27:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 28:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 29:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 30:</strong> CORREOS: --- | PASS: ---</div>
         </div>
 
         <div id="otros" class="seccion-cuentas">
-            <h3 style="color:#ff0000">➕ OTROS</h3>
-            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
-            <div id="otros-list"></div>
+            <h3>➕ OTROS</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 2:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 3:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 4:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 5:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 6:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 7:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 8:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 9:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 10:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 11:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 12:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 13:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 14:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 15:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 16:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 17:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 18:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 19:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 20:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 21:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 22:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 23:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 24:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 25:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 26:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 27:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 28:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 29:</strong> CORREOS: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 30:</strong> CORREOS: --- | PASS: ---</div>
         </div>
 
         <button class="cerrar-btn" onclick="location.reload()">CERRAR SESIÓN</button>
     </div>
 
     <script>
-        // Generador automático de espacios restantes (hasta completar 30)
-        function rellenar(idPadre, tipo, inicial) {
-            const contenedor = document.getElementById(idPadre);
-            for (let i = inicial; i <= 30; i++) {
-                const div = document.createElement('div');
-                div.className = 'dato-box';
-                div.innerHTML = (tipo === 'roblox') 
-                    ? `<strong>ACC ${i}:</strong> CORREO: --- | PASS: --- | <span class="key-tag">KEY: NO</span>`
-                    : `<strong>CUENTA ${i}:</strong> CORREO: --- | PASS: ---`;
-                contenedor.appendChild(div);
+        // Función para Entrar
+        function entrar() {
+            var clave = document.getElementById("pass").value;
+            if (clave === "904369662") { 
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("dashboard-screen").style.display = "block";
+                document.body.style.overflow = "auto";
+            } else {
+                alert("¿No eres tú, onichan? Esa llave no abre mi interior... ❌");
             }
         }
 
-        // Se indica desde qué número empezar a rellenar automáticamente
-        rellenar('roblox-list', 'roblox', 3);
-        rellenar('tiktok-list', 'otros', 3);
-        rellenar('facebook-list', 'otros', 2);
-        rellenar('instagram-list', 'otros', 2);
-        rellenar('gmail-list', 'otros', 2);
-        rellenar('otros-list', 'otros', 2);
-
-        function entrar() {
-            if (document.getElementById("pass").value === "904369662") { 
-                document.getElementById("login-screen").style.display = "none";
-                document.getElementById("dashboard-screen").style.display = "block";
-            } else { alert("Llave incorrecta, onichan... ❌"); }
+        // Función para mostrar categorías y activar botones
+        function mostrar(idSeccion) {
+            // Esconder todas las secciones
+            var secciones = document.getElementsByClassName("seccion-cuentas");
+            for (var i = 0; i < secciones.length; i++) {
+                secciones[i].classList.remove("visible");
+            }
+            // Quitar clase activa de todos los botones
+            var botones = document.getElementsByClassName("menu-btn");
+            for (var i = 0; i < botones.length; i++) {
+                botones[i].classList.remove("active");
+            }
+            // Mostrar la seleccionada
+            document.getElementById(idSeccion).classList.add("visible");
+            // Activar botón (buscamos el botón que tiene la función mostrar('idSeccion'))
+            event.currentTarget.classList.add("active");
         }
 
-        function mostrar(id) {
-            const secciones = document.getElementsByClassName("seccion-cuentas");
-            for (let s of secciones) s.classList.remove("visible");
-            document.getElementById(id).classList.add("visible");
-        }
-
-        document.getElementById("pass").addEventListener("keydown", (e) => { if(e.key === "Enter") entrar(); });
+        // Tecla Enter para Entrar
+        document.getElementById("pass").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") { entrar(); }
+        });
     </script>
 </body>
 </html>
