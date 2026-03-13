@@ -121,7 +121,13 @@
                 alert("¿No eres tú, onichan? Esa llave no abre mi interior... ❌");
             }
         }
+
+        // FUNCIÓN PARA EL ENTER
+        document.getElementById("pass").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                entrar();
+            }
+        });
     </script>
 </body>
 </html>
-
