@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Bóveda Personal</title>
+    <style>
+        body { background: #000; color: #00ff88; font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .box { background: #111; border: 1px solid #333; padding: 20px; border-radius: 15px; display: inline-block; width: 300px; }
+        input { width: 80%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
+        button { background: #00ff88; color: black; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .secreto { display: none; } /* Esto esconde tus datos al principio */
+    </style>
+</head>
+<body>
+
+    <div id="login">
+        <h2>🔒 Acceso Único</h2>
+        <input type="password" id="pass" placeholder="Tu Clave Maestra">
+        <br>
+        <button onclick="entrar()">ENTRAR</button>
+    </div>
+
+    <div id="mi-boveda" class="secreto">
+        <h2>🔑 Mis Cuentas</h2>
+        <div class="box">
+            <p><strong>🎮 ROBLOX:</strong> usuario / clave</p>
+            <p><strong>📧 GMAIL:</strong> correo@gmail.com / clave</p>
+            <p><strong>📸 TIKTOK:</strong> @usuario / clave</p>
+        </div>
+        <br><br>
+        <button onclick="location.reload()" style="background: red; color: white;">CERRAR</button>
+    </div>
+
+    <script>
+        function entrar() {
+            var clave = document.getElementById("pass").value;
+            if (clave === "1234") { // <--- AQUÍ CAMBIA "1234" POR TU CLAVE
+                document.getElementById("login").style.display = "none";
+                document.getElementById("mi-boveda").style.display = "block";
+            } else {
+                alert("Clave incorrecta");
+            }
+        }
+    </script>
+</body>
+</html>
