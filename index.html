@@ -3,133 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Bóveda Secreta Oni-chan ⚡</title>
+    <title>⚡ La Bóveda del Rey de los Piratas ⚡</title>
     <style>
-        /* Fondo con animación de imágenes de anime */
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #101010; /* Color de respaldo */
-            background-image: url('https://i.pinimg.com/originals/f3/f1/e2/f3f1e29e9d6d506d332617f699042c1d.gif'); /* Fondo de One Piece */
+            /* Fondo de One Piece - Luffy */
+            background: #000 url('https://wallpaperaccess.com/full/17350.jpg') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            animation: anime-bg 20s infinite; /* Animación de fondo */
         }
 
-        /* Definición de la animación de fondo */
-        @keyframes anime-bg {
-            0%, 100% { background-image: url('https://i.pinimg.com/originals/f3/f1/e2/f3f1e29e9d6d506d332617f699042c1d.gif'); } /* Luffy */
-            25% { background-image: url('https://i.pinimg.com/originals/a1/6d/46/a16d460e0a5198008892d5c36773a4b9.gif'); } /* Tokyo Ghoul */
-            50% { background-image: url('https://i.pinimg.com/originals/77/6c/1c/776c1c877993414a38a7c645b8f6733b.gif'); } /* Meme o GIF */
-            75% { background-image: url('https://i.pinimg.com/originals/e5/a1/c6/e5a1c6a28795550a2e3792f3a67d9834.gif'); } /* Zoro o Zoro meme */
+        /* Capa oscura para que el fondo no moleste la vista */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
         }
 
-        /* El cuadrado del centro (tarjeta) */
         .card {
-            background: rgba(30, 30, 30, 0.9); /* Fondo oscuro semitransparente */
+            background: #1a1a1a;
             padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            border-radius: 20px;
+            box-shadow: 0 0 20px #3498db; /* Brillo azul eléctrico */
             text-align: center;
             width: 90%;
-            max-width: 400px;
-            border: 2px solid #333; /* Borde más oscuro */
-            color: #eee;
+            max-width: 380px;
+            border: 2px solid #3498db;
         }
 
-        h2 { color: #5dade2; margin-bottom: 20px; font-size: 1.5rem; } /* Azul frío */
-        p { color: #bbb; font-size: 0.9rem; }
+        h2 { color: #3498db; margin: 0; font-size: 1.8rem; text-transform: uppercase; }
+        p { color: #aaa; margin-top: 10px; font-size: 0.9rem; }
 
-        /* Estilo del input (donde pones la clave) */
         input {
             width: 100%;
             padding: 15px;
-            margin: 20px 0;
-            border-radius: 15px;
-            border: 2px solid #555;
-            outline: none;
-            background: #1a1a1a;
-            color: #fff;
-            text-align: center; /* ¡ESTO CENTRA EL TEXTO! */
-            font-size: 1.1rem;
-            box-sizing: border-box;
+            margin: 25px 0;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: #000;
+            color: #3498db;
+            /* ESTO CENTRA EL TEXTO PERFECTO */
+            text-align: center; 
+            font-size: 1.2rem;
             font-weight: bold;
+            box-sizing: border-box;
+            outline: none;
         }
 
-        input:focus { border-color: #5dade2; }
+        input:focus { border-color: #3498db; box-shadow: 0 0 10px #3498db; }
 
-        /* Botón bonito (azul) */
         button {
-            background: #5dade2; /* Azul frío */
+            background: #3498db;
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            font-size: 1rem;
-            transition: transform 0.2s, background 0.2s;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            text-transform: uppercase;
         }
 
-        button:hover { background: #3498db; transform: scale(1.02); }
+        button:hover { background: #2980b9; transform: scale(1.03); }
 
-        /* Estilo para los datos cuando entras */
         .secreto { display: none; }
         .dato-box {
-            background: rgba(40, 40, 40, 0.9);
+            background: #000;
             padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
             text-align: left;
-            border-left: 5px solid #5dade2;
+            border-left: 4px solid #3498db;
+            color: white;
         }
-        .cerrar-btn { background: #555; margin-top: 20px; color: white; }
+        .cerrar-btn { background: #e74c3c; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <div id="login" class="card">
-        <h2>🌸 ¡Hola!</h2>
+        <h2>🏴‍☠️ ¡HOLA!</h2>
         <p>onichan mete tu llave aqui para abrirte mi interior</p>
-        <input type="password" id="pass" placeholder="Tu llave secreta...">
-        <button onclick="entrar()">ABRIR ⚡</button>
+        <input type="password" id="pass" placeholder="LLAVE MAESTRA">
+        <button onclick="entrar()">ABRIR PORTAL ⚡</button>
     </div>
 
     <div id="mi-boveda" class="card secreto">
-        <h2>🔑 Mis Secretos</h2>
-        
+        <h2 style="color: #f1c40f;">💎 TESOROS</h2>
+        <br>
         <div class="dato-box">
-            <strong>🎮 ROBLOX</strong><br>
+            <strong style="color: #3498db;">🎮 ROBLOX:</strong><br>
             <span>User: tu_usuario | Pass: tu_clave</span>
         </div>
-
-        <div class="dato-box" style="border-left-color: #bde0fe;">
-            <strong>📧 GMAIL</strong><br>
+        <div class="dato-box">
+            <strong style="color: #3498db;">📧 GMAIL:</strong><br>
             <span>correo@gmail.com | clave123</span>
         </div>
-
-        <div class="dato-box" style="border-left-color: #cdb4db;">
-            <strong>📸 TIKTOK</strong><br>
-            <span>@usuario | password</span>
-        </div>
-
-        <button class="cerrar-btn" onclick="location.reload()">CERRAR TODO</button>
+        <button class="cerrar-btn" onclick="location.reload()">CERRAR BÓVEDA</button>
     </div>
 
     <script>
         function entrar() {
             var clave = document.getElementById("pass").value;
-            // CAMBIA "1234" por tu clave favorita
-            if (clave === "1234") { 
+            // TU CLAVE ACTUAL: 904369662
+            if (clave === "904369662") { 
                 document.getElementById("login").style.display = "none";
                 document.getElementById("mi-boveda").style.display = "block";
             } else {
-                alert("¿No eres tú, onichan? Esa no es la llave... ⚡❌");
+                alert("¿No eres tú, onichan? Esa llave no abre mi interior... ❌");
             }
         }
     </script>
