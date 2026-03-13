@@ -12,131 +12,111 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            /* NUEVO FONDO: Luffy Gear 5 oscuro y épico */
-            background: #000 url('https://w0.peakpx.com/wallpaper/77/401/HD-wallpaper-luffy-gear-5-anime-naruto-one-piece-zoro.jpg') no-repeat center center fixed;
+            /* FONDO GEAR 5 - Link más estable */
+            background: #000 url('https://images.alphacoders.com/129/1291196.png') no-repeat center center fixed;
             background-size: cover;
             color: white;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* Capa oscura general para contraste */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             z-index: -1;
         }
 
-        /* --- TARJETA CENTRAL CON TRANSPARENCIA --- */
+        /* --- CONTENEDOR PRINCIPAL --- */
         .card {
-            background: rgba(10, 10, 10, 0.85); /* Fondo muy oscuro y transparente */
+            background: rgba(10, 10, 10, 0.9);
             padding: 30px;
             border-radius: 20px;
             text-align: center;
-            border: 2px solid #e74c3c; /* Borde ROJO ELÉCTRICO */
-            box-shadow: 0 0 25px rgba(231, 76, 60, 0.7); /* Sombra ROJA */
-            transition: all 0.3s ease;
-        }
-
-        /* --- LOGIN: DISEÑO CUADRADO Y COMPACTO --- */
-        #login.card {
-            width: 320px; /* Ancho fijo para que sea un cuadrado */
-            height: 320px; /* Alto fijo para que sea un cuadrado */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            border: 2px solid #ff0000; /* ROJO ELÉCTRICO */
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
             box-sizing: border-box;
         }
 
-        #login h2 { color: #e74c3c; margin-bottom: 5px; font-size: 1.6rem; text-shadow: 0 0 10px #e74c3c; }
-        #login p { color: #ccc; font-size: 0.8rem; margin: 0 0 20px 0; }
+        /* --- LOGIN CUADRADO --- */
+        #login-screen {
+            width: 350px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #login-screen h2 { color: #ff0000; text-shadow: 0 0 10px #ff0000; margin: 0; }
+        #login-screen p { font-size: 0.85rem; color: #bbb; margin: 10px 0 20px 0; }
 
         input {
-            width: 80%; padding: 12px; margin: 15px 0;
+            width: 100%; padding: 12px; margin-bottom: 20px;
             border-radius: 8px; border: 1px solid #444;
-            background: rgba(0, 0, 0, 0.6); color: #e74c3c;
+            background: rgba(0, 0, 0, 0.8); color: #ff0000;
             text-align: center; font-size: 1.1rem; font-weight: bold;
             outline: none; box-sizing: border-box;
         }
-        input:focus { border-color: #e74c3c; box-shadow: 0 0 10px #e74c3c; }
 
         .main-btn { 
-            background: #e74c3c; color: white; border: none; 
-            padding: 12px 20px; border-radius: 8px; width: 80%; 
+            background: #ff0000; color: white; border: none; 
+            padding: 12px; border-radius: 8px; width: 100%; 
             font-weight: bold; cursor: pointer; text-transform: uppercase;
-            transition: 0.3s;
         }
-        .main-btn:hover { background: #c0392b; transform: scale(1.05); }
 
-        /* --- DASHBOARD: TAMAÑO ADAPTABLE --- */
-        #dashboard.card {
+        /* --- DASHBOARD (Oculto al inicio) --- */
+        #dashboard-screen {
+            display: none; /* Esto evita que se vea al costado */
             width: 95%;
-            max-width: 650px; /* Ancho mayor para las tablas */
-            padding: 25px;
+            max-width: 600px;
         }
 
-        #dashboard h2 { color: #f1c40f; text-shadow: 0 0 10px #f1c40f; margin-bottom: 20px; }
-
-        /* --- NAVEGACIÓN DASHBOARD --- */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
 
         .menu-btn {
-            background: rgba(20, 20, 20, 0.7);
-            color: #e74c3c;
-            border: 1px solid #e74c3c;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.8rem;
+            background: transparent; color: #ff0000;
+            border: 1px solid #ff0000; padding: 10px;
+            border-radius: 8px; cursor: pointer; font-weight: bold;
             transition: 0.3s;
         }
-        .menu-btn:hover { background: #e74c3c; color: white; }
 
-        /* --- LISTADO (Mantenemos la estructura Pro) --- */
-        .seccion-cuentas { display: none; margin-top: 20px; text-align: left; max-height: 55vh; overflow-y: auto; padding-right: 10px; }
-        .dato-box {
-            background: rgba(5, 5, 5, 0.6);
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            border-left: 4px solid #e74c3c;
-            font-size: 0.85rem;
-            border-right: 1px solid #333;
-        }
-        .dato-box strong { color: #e74c3c; }
-        .key-tag { color: #f1c40f; font-weight: bold; }
+        .menu-btn:hover { background: #ff0000; color: white; }
 
+        /* --- SECCIONES --- */
+        .seccion-cuentas { display: none; text-align: left; max-height: 40vh; overflow-y: auto; padding-right: 10px; }
         .visible { display: block; }
-        .oculto { display: none; }
 
-        /* Scrollbar personalizada Roja */
-        .seccion-cuentas::-webkit-scrollbar { width: 5px; }
-        .seccion-cuentas::-webkit-scrollbar-thumb { background: #e74c3c; border-radius: 10px; }
+        .dato-box {
+            background: rgba(30, 0, 0, 0.3);
+            padding: 12px; border-radius: 8px; margin-bottom: 8px;
+            border-left: 4px solid #ff0000; font-size: 0.85rem;
+        }
 
-        .cerrar-btn { background: #c0392b; margin-top: 20px; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer; }
+        .key-tag { color: #f1c40f; font-weight: bold; }
+        .cerrar-btn { background: #660000; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer; margin-top: 20px;}
+
+        /* Scroll Rojo */
+        .seccion-cuentas::-webkit-scrollbar { width: 4px; }
+        .seccion-cuentas::-webkit-scrollbar-thumb { background: #ff0000; border-radius: 10px; }
     </style>
 </head>
 <body>
 
-    <div id="login" class="card">
+    <div id="login-screen" class="card">
         <h2>🏴‍☠️ NAKAMA VAULT</h2>
         <p>onichan mete tu llave aqui para abrirte mi interior</p>
         <input type="password" id="pass" placeholder="LLAVE MAESTRA">
         <button class="main-btn" onclick="entrar()">ABRIR PORTAL ⚡</button>
     </div>
 
-    <div id="dashboard" class="card oculto">
-        <h2>💎 MIS TESOROS</h2>
-        
-        <div class="menu-grid" id="botones-menu">
+    <div id="dashboard-screen" class="card">
+        <h2 style="color: #f1c40f;">💎 MIS TESOROS</h2>
+        <div class="menu-grid">
             <button class="menu-btn" onclick="mostrar('roblox')">🎮 ROBLOX</button>
             <button class="menu-btn" onclick="mostrar('tiktok')">📱 TIKTOK</button>
             <button class="menu-btn" onclick="mostrar('facebook')">👥 FACEBOOK</button>
@@ -145,56 +125,29 @@
             <button class="menu-btn" onclick="mostrar('otros')">➕ OTROS</button>
         </div>
 
-        <div id="roblox" class="seccion-cuentas">
-            <h3 style="color:#e74c3c">🎮 ROBLOX (Key Check Active)</h3>
-            <div id="roblox-list"></div> 
-        </div>
-
-        <div id="tiktok" class="seccion-cuentas">
-            <h3 style="color:#e74c3c">📱 TIKTOK</h3>
-            <div id="tiktok-list"></div>
-        </div>
-
-        <div id="facebook" class="seccion-cuentas">
-            <h3 style="color:#e74c3c">👥 FACEBOOK</h3>
-            <div id="facebook-list"></div>
-        </div>
-
-        <div id="instagram" class="seccion-cuentas">
-            <h3 style="color:#e74c3c">📸 INSTAGRAM</h3>
-            <div id="instagram-list"></div>
-        </div>
-
-        <div id="gmail" class="seccion-cuentas">
-            <h3 style="color:#e74c3c">📧 GMAIL</h3>
-            <div id="gmail-list"></div>
-        </div>
-
-        <div id="otros" class="seccion-cuentas">
-            <h3 style="color:#e74c3c">➕ OTROS</h3>
-            <div id="otros-list"></div>
-        </div>
+        <div id="roblox" class="seccion-cuentas"><div id="roblox-list"></div></div>
+        <div id="tiktok" class="seccion-cuentas"><div id="tiktok-list"></div></div>
+        <div id="facebook" class="seccion-cuentas"><div id="facebook-list"></div></div>
+        <div id="instagram" class="seccion-cuentas"><div id="instagram-list"></div></div>
+        <div id="gmail" class="seccion-cuentas"><div id="gmail-list"></div></div>
+        <div id="otros" class="seccion-cuentas"><div id="otros-list"></div></div>
 
         <button class="cerrar-btn" onclick="location.reload()">CERRAR SESIÓN</button>
     </div>
 
     <script>
-        // Generador automático de 30 espacios (Actualizado a formato Rojo)
         function generarEspacios(idPadre, tipo) {
             const contenedor = document.getElementById(idPadre);
             for (let i = 1; i <= 30; i++) {
                 const div = document.createElement('div');
                 div.className = 'dato-box';
-                if (tipo === 'roblox') {
-                    div.innerHTML = `<strong>ACC ${i}:</strong> CORREOS: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: NO</span>`;
-                } else {
-                    div.innerHTML = `<strong>CUENTA ${i}:</strong> CORREOS: --- | CONTRASEÑA: ---`;
-                }
+                div.innerHTML = tipo === 'roblox' 
+                    ? `<strong>ACC ${i}:</strong> CORREOS: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: NO</span>`
+                    : `<strong>CUENTA ${i}:</strong> CORREOS: --- | CONTRASEÑA: ---`;
                 contenedor.appendChild(div);
             }
         }
 
-        // Llamamos a la generación de espacios
         generarEspacios('roblox-list', 'roblox');
         generarEspacios('tiktok-list', 'otros');
         generarEspacios('facebook-list', 'otros');
@@ -203,28 +156,21 @@
         generarEspacios('otros-list', 'otros');
 
         function entrar() {
-            var clave = document.getElementById("pass").value;
-            if (clave === "904369662") { 
-                document.getElementById("login").classList.add("oculto");
-                document.getElementById("dashboard").classList.remove("oculto");
-                // Previene problemas de scroll en móvil
-                document.body.style.overflow = "auto";
+            if (document.getElementById("pass").value === "904369662") { 
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("dashboard-screen").style.display = "block";
             } else {
-                alert("¿No eres tú, onichan? Esa llave no abre mi interior... ❌");
+                alert("Llave incorrecta, onichan... ❌");
             }
         }
 
-        function mostrar(idSeccion) {
-            var secciones = document.getElementsByClassName("seccion-cuentas");
-            for (var i = 0; i < secciones.length; i++) {
-                secciones[i].classList.remove("visible");
-            }
-            document.getElementById(idSeccion).classList.add("visible");
+        function mostrar(id) {
+            const secciones = document.getElementsByClassName("seccion-cuentas");
+            for (let s of secciones) s.classList.remove("visible");
+            document.getElementById(id).classList.add("visible");
         }
 
-        document.getElementById("pass").addEventListener("keydown", function(event) {
-            if (event.key === "Enter") { entrar(); }
-        });
+        document.getElementById("pass").addEventListener("keydown", (e) => { if(e.key === "Enter") entrar(); });
     </script>
 </body>
 </html>
