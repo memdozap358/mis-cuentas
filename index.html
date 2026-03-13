@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Nakama Dashboard Ultra ⚡</title>
+    <title>⚡ Nakama Vault: Gear Red ⚡</title>
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -12,53 +12,85 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background: #000 url('https://wallpaperaccess.com/full/17350.jpg') no-repeat center center fixed;
+            /* NUEVO FONDO: Luffy Gear 5 oscuro y épico */
+            background: #000 url('https://w0.peakpx.com/wallpaper/77/401/HD-wallpaper-luffy-gear-5-anime-naruto-one-piece-zoro.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
             overflow-x: hidden;
         }
 
+        /* Capa oscura general para contraste */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.7);
             z-index: -1;
         }
 
+        /* --- TARJETA CENTRAL CON TRANSPARENCIA --- */
         .card {
-            background: rgba(15, 15, 15, 0.95);
-            padding: 25px;
+            background: rgba(10, 10, 10, 0.85); /* Fondo muy oscuro y transparente */
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 0 30px #3498db;
             text-align: center;
-            width: 95%;
-            max-width: 600px;
-            border: 2px solid #3498db;
-            margin: 20px;
+            border: 2px solid #e74c3c; /* Borde ROJO ELÉCTRICO */
+            box-shadow: 0 0 25px rgba(231, 76, 60, 0.7); /* Sombra ROJA */
+            transition: all 0.3s ease;
         }
 
-        /* --- INPUTS --- */
+        /* --- LOGIN: DISEÑO CUADRADO Y COMPACTO --- */
+        #login.card {
+            width: 320px; /* Ancho fijo para que sea un cuadrado */
+            height: 320px; /* Alto fijo para que sea un cuadrado */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        #login h2 { color: #e74c3c; margin-bottom: 5px; font-size: 1.6rem; text-shadow: 0 0 10px #e74c3c; }
+        #login p { color: #ccc; font-size: 0.8rem; margin: 0 0 20px 0; }
+
         input {
-            width: 100%; padding: 15px; margin: 20px 0;
-            border-radius: 10px; border: 1px solid #333;
-            background: #000; color: #3498db;
-            text-align: center; font-size: 1.2rem; font-weight: bold;
+            width: 80%; padding: 12px; margin: 15px 0;
+            border-radius: 8px; border: 1px solid #444;
+            background: rgba(0, 0, 0, 0.6); color: #e74c3c;
+            text-align: center; font-size: 1.1rem; font-weight: bold;
             outline: none; box-sizing: border-box;
         }
+        input:focus { border-color: #e74c3c; box-shadow: 0 0 10px #e74c3c; }
 
-        /* --- NAVEGACIÓN --- */
+        .main-btn { 
+            background: #e74c3c; color: white; border: none; 
+            padding: 12px 20px; border-radius: 8px; width: 80%; 
+            font-weight: bold; cursor: pointer; text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .main-btn:hover { background: #c0392b; transform: scale(1.05); }
+
+        /* --- DASHBOARD: TAMAÑO ADAPTABLE --- */
+        #dashboard.card {
+            width: 95%;
+            max-width: 650px; /* Ancho mayor para las tablas */
+            padding: 25px;
+        }
+
+        #dashboard h2 { color: #f1c40f; text-shadow: 0 0 10px #f1c40f; margin-bottom: 20px; }
+
+        /* --- NAVEGACIÓN DASHBOARD --- */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 10px;
             margin-bottom: 20px;
         }
 
         .menu-btn {
-            background: #111;
-            color: #3498db;
-            border: 1px solid #3498db;
+            background: rgba(20, 20, 20, 0.7);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
             padding: 10px;
             border-radius: 8px;
             cursor: pointer;
@@ -66,46 +98,43 @@
             font-size: 0.8rem;
             transition: 0.3s;
         }
+        .menu-btn:hover { background: #e74c3c; color: white; }
 
-        .menu-btn:hover { background: #3498db; color: white; }
-
-        /* --- LISTADO --- */
-        .seccion-cuentas { display: none; margin-top: 20px; text-align: left; max-height: 60vh; overflow-y: auto; padding-right: 10px; }
+        /* --- LISTADO (Mantenemos la estructura Pro) --- */
+        .seccion-cuentas { display: none; margin-top: 20px; text-align: left; max-height: 55vh; overflow-y: auto; padding-right: 10px; }
         .dato-box {
-            background: #050505;
+            background: rgba(5, 5, 5, 0.6);
             padding: 12px;
             border-radius: 10px;
             margin-bottom: 8px;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid #e74c3c;
             font-size: 0.85rem;
-            border-right: 1px solid #222;
+            border-right: 1px solid #333;
         }
-
-        .dato-box strong { color: #3498db; }
+        .dato-box strong { color: #e74c3c; }
         .key-tag { color: #f1c40f; font-weight: bold; }
 
         .visible { display: block; }
         .oculto { display: none; }
 
-        /* Scrollbar personalizada */
+        /* Scrollbar personalizada Roja */
         .seccion-cuentas::-webkit-scrollbar { width: 5px; }
-        .seccion-cuentas::-webkit-scrollbar-thumb { background: #3498db; border-radius: 10px; }
+        .seccion-cuentas::-webkit-scrollbar-thumb { background: #e74c3c; border-radius: 10px; }
 
-        .main-btn { background: #3498db; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; }
-        .cerrar-btn { background: #e74c3c; margin-top: 20px; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer; }
+        .cerrar-btn { background: #c0392b; margin-top: 20px; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div id="login" class="card">
-        <h2 style="color:#3498db">🏴‍☠️ NAKAMA VAULT</h2>
-        <p>❤ onichan mete tu llave aqui para abrirte mi interior ❤</p>
+        <h2>🏴‍☠️ NAKAMA VAULT</h2>
+        <p>onichan mete tu llave aqui para abrirte mi interior</p>
         <input type="password" id="pass" placeholder="LLAVE MAESTRA">
         <button class="main-btn" onclick="entrar()">ABRIR PORTAL ⚡</button>
     </div>
 
     <div id="dashboard" class="card oculto">
-        <h2 style="color: #f1c40f;">💎 MIS TESOROS</h2>
+        <h2>💎 MIS TESOROS</h2>
         
         <div class="menu-grid" id="botones-menu">
             <button class="menu-btn" onclick="mostrar('roblox')">🎮 ROBLOX</button>
@@ -117,34 +146,32 @@
         </div>
 
         <div id="roblox" class="seccion-cuentas">
-            <h3 style="color:#3498db">🎮 ROBLOX (Con Key Check)</h3>
-            <div class="dato-box"><strong>ACC 1:</strong> CORREO: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: SI</span></div>
-            <div class="dato-box"><strong>ACC 2:</strong> CORREO: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: NO</span></div>
+            <h3 style="color:#e74c3c">🎮 ROBLOX (Key Check Active)</h3>
             <div id="roblox-list"></div> 
         </div>
 
         <div id="tiktok" class="seccion-cuentas">
-            <h3 style="color:#3498db">📱 TIKTOK</h3>
+            <h3 style="color:#e74c3c">📱 TIKTOK</h3>
             <div id="tiktok-list"></div>
         </div>
 
         <div id="facebook" class="seccion-cuentas">
-            <h3 style="color:#3498db">👥 FACEBOOK</h3>
+            <h3 style="color:#e74c3c">👥 FACEBOOK</h3>
             <div id="facebook-list"></div>
         </div>
 
         <div id="instagram" class="seccion-cuentas">
-            <h3 style="color:#3498db">📸 INSTAGRAM</h3>
+            <h3 style="color:#e74c3c">📸 INSTAGRAM</h3>
             <div id="instagram-list"></div>
         </div>
 
         <div id="gmail" class="seccion-cuentas">
-            <h3 style="color:#3498db">📧 GMAIL</h3>
+            <h3 style="color:#e74c3c">📧 GMAIL</h3>
             <div id="gmail-list"></div>
         </div>
 
         <div id="otros" class="seccion-cuentas">
-            <h3 style="color:#3498db">➕ OTROS</h3>
+            <h3 style="color:#e74c3c">➕ OTROS</h3>
             <div id="otros-list"></div>
         </div>
 
@@ -152,16 +179,16 @@
     </div>
 
     <script>
-        // Generador automático de espacios para que el código no sea infinito
+        // Generador automático de 30 espacios (Actualizado a formato Rojo)
         function generarEspacios(idPadre, tipo) {
             const contenedor = document.getElementById(idPadre);
-            for (let i = 3; i <= 30; i++) {
+            for (let i = 1; i <= 30; i++) {
                 const div = document.createElement('div');
                 div.className = 'dato-box';
                 if (tipo === 'roblox') {
-                    div.innerHTML = `<strong>ACC ${i}:</strong> CORREO: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: NO</span>`;
+                    div.innerHTML = `<strong>ACC ${i}:</strong> CORREOS: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: NO</span>`;
                 } else {
-                    div.innerHTML = `<strong>CUENTA ${i}:</strong> CORREO: --- | CONTRASEÑA: ---`;
+                    div.innerHTML = `<strong>CUENTA ${i}:</strong> CORREOS: --- | CONTRASEÑA: ---`;
                 }
                 contenedor.appendChild(div);
             }
@@ -180,6 +207,8 @@
             if (clave === "904369662") { 
                 document.getElementById("login").classList.add("oculto");
                 document.getElementById("dashboard").classList.remove("oculto");
+                // Previene problemas de scroll en móvil
+                document.body.style.overflow = "auto";
             } else {
                 alert("¿No eres tú, onichan? Esa llave no abre mi interior... ❌");
             }
