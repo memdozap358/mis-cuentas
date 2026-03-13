@@ -3,130 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ La Bóveda del Rey de los Piratas ⚡</title>
+    <title>⚡ Nakama Dashboard Ultra ⚡</title>
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            /* Fondo de One Piece - Luffy */
             background: #000 url('https://wallpaperaccess.com/full/17350.jpg') no-repeat center center fixed;
             background-size: cover;
+            color: white;
+            overflow-x: hidden;
         }
 
-        /* Capa oscura para que el fondo no moleste la vista */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.75);
             z-index: -1;
         }
 
         .card {
-            background: #1a1a1a;
-            padding: 40px;
+            background: rgba(15, 15, 15, 0.95);
+            padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 0 20px #3498db; /* Brillo azul eléctrico */
+            box-shadow: 0 0 30px #3498db;
             text-align: center;
-            width: 90%;
-            max-width: 380px;
+            width: 95%;
+            max-width: 600px;
             border: 2px solid #3498db;
+            margin: 20px;
         }
 
-        h2 { color: #3498db; margin: 0; font-size: 1.8rem; text-transform: uppercase; }
-        p { color: #aaa; margin-top: 10px; font-size: 0.9rem; }
-
+        /* --- INPUTS --- */
         input {
-            width: 100%;
-            padding: 15px;
-            margin: 25px 0;
-            border-radius: 10px;
-            border: 1px solid #333;
-            background: #000;
+            width: 100%; padding: 15px; margin: 20px 0;
+            border-radius: 10px; border: 1px solid #333;
+            background: #000; color: #3498db;
+            text-align: center; font-size: 1.2rem; font-weight: bold;
+            outline: none; box-sizing: border-box;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .menu-btn {
+            background: #111;
             color: #3498db;
-            /* ESTO CENTRA EL TEXTO PERFECTO */
-            text-align: center; 
-            font-size: 1.2rem;
-            font-weight: bold;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        input:focus { border-color: #3498db; box-shadow: 0 0 10px #3498db; }
-
-        button {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: bold;
+            border: 1px solid #3498db;
+            padding: 10px;
+            border-radius: 8px;
             cursor: pointer;
-            width: 100%;
-            font-size: 1.1rem;
+            font-weight: bold;
+            font-size: 0.8rem;
             transition: 0.3s;
-            text-transform: uppercase;
         }
 
-        button:hover { background: #2980b9; transform: scale(1.03); }
+        .menu-btn:hover { background: #3498db; color: white; }
 
-        .secreto { display: none; }
+        /* --- LISTADO --- */
+        .seccion-cuentas { display: none; margin-top: 20px; text-align: left; max-height: 60vh; overflow-y: auto; padding-right: 10px; }
         .dato-box {
-            background: #000;
-            padding: 15px;
+            background: #050505;
+            padding: 12px;
             border-radius: 10px;
-            margin-bottom: 15px;
-            text-align: left;
+            margin-bottom: 8px;
             border-left: 4px solid #3498db;
-            color: white;
+            font-size: 0.85rem;
+            border-right: 1px solid #222;
         }
-        .cerrar-btn { background: #e74c3c; margin-top: 10px; }
+
+        .dato-box strong { color: #3498db; }
+        .key-tag { color: #f1c40f; font-weight: bold; }
+
+        .visible { display: block; }
+        .oculto { display: none; }
+
+        /* Scrollbar personalizada */
+        .seccion-cuentas::-webkit-scrollbar { width: 5px; }
+        .seccion-cuentas::-webkit-scrollbar-thumb { background: #3498db; border-radius: 10px; }
+
+        .main-btn { background: #3498db; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; }
+        .cerrar-btn { background: #e74c3c; margin-top: 20px; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div id="login" class="card">
-        <h2>🏴‍☠️ ¡HOLA NAKAMA BIENVENIDO! 🏴‍☠️</h2> 
+        <h2 style="color:#3498db">🏴‍☠️ NAKAMA VAULT</h2>
         <p>❤ onichan mete tu llave aqui para abrirte mi interior ❤</p>
         <input type="password" id="pass" placeholder="LLAVE MAESTRA">
-        <button onclick="entrar()">𓇣😈 ABRIR 😈𓇣</button>
+        <button class="main-btn" onclick="entrar()">ABRIR PORTAL ⚡</button>
     </div>
 
-    <div id="mi-boveda" class="card secreto">
-        <h2 style="color: #f1c40f;">💎 TESOROS 💎</h2>
-        <br>
-        <div class="dato-box">
-            <strong style="color: #3498db;">🎮 ROBLOX:</strong><br>
-            <span>User: tu_usuario | Pass: tu_clave</span>
+    <div id="dashboard" class="card oculto">
+        <h2 style="color: #f1c40f;">💎 MIS TESOROS</h2>
+        
+        <div class="menu-grid" id="botones-menu">
+            <button class="menu-btn" onclick="mostrar('roblox')">🎮 ROBLOX</button>
+            <button class="menu-btn" onclick="mostrar('tiktok')">📱 TIKTOK</button>
+            <button class="menu-btn" onclick="mostrar('facebook')">👥 FACEBOOK</button>
+            <button class="menu-btn" onclick="mostrar('instagram')">📸 INSTAGRAM</button>
+            <button class="menu-btn" onclick="mostrar('gmail')">📧 GMAIL</button>
+            <button class="menu-btn" onclick="mostrar('otros')">➕ OTROS</button>
         </div>
-        <div class="dato-box">
-            <strong style="color: #3498db;">📧 GMAIL:</strong><br>
-            <span>correo@gmail.com | clave123</span>
+
+        <div id="roblox" class="seccion-cuentas">
+            <h3 style="color:#3498db">🎮 ROBLOX (Con Key Check)</h3>
+            <div class="dato-box"><strong>ACC 1:</strong> CORREO: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: SI</span></div>
+            <div class="dato-box"><strong>ACC 2:</strong> CORREO: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: NO</span></div>
+            <div id="roblox-list"></div> 
         </div>
-        <button class="cerrar-btn" onclick="location.reload()">CERRAR BÓVEDA</button>
+
+        <div id="tiktok" class="seccion-cuentas">
+            <h3 style="color:#3498db">📱 TIKTOK</h3>
+            <div id="tiktok-list"></div>
+        </div>
+
+        <div id="facebook" class="seccion-cuentas">
+            <h3 style="color:#3498db">👥 FACEBOOK</h3>
+            <div id="facebook-list"></div>
+        </div>
+
+        <div id="instagram" class="seccion-cuentas">
+            <h3 style="color:#3498db">📸 INSTAGRAM</h3>
+            <div id="instagram-list"></div>
+        </div>
+
+        <div id="gmail" class="seccion-cuentas">
+            <h3 style="color:#3498db">📧 GMAIL</h3>
+            <div id="gmail-list"></div>
+        </div>
+
+        <div id="otros" class="seccion-cuentas">
+            <h3 style="color:#3498db">➕ OTROS</h3>
+            <div id="otros-list"></div>
+        </div>
+
+        <button class="cerrar-btn" onclick="location.reload()">CERRAR SESIÓN</button>
     </div>
 
     <script>
+        // Generador automático de espacios para que el código no sea infinito
+        function generarEspacios(idPadre, tipo) {
+            const contenedor = document.getElementById(idPadre);
+            for (let i = 3; i <= 30; i++) {
+                const div = document.createElement('div');
+                div.className = 'dato-box';
+                if (tipo === 'roblox') {
+                    div.innerHTML = `<strong>ACC ${i}:</strong> CORREO: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: NO</span>`;
+                } else {
+                    div.innerHTML = `<strong>CUENTA ${i}:</strong> CORREO: --- | CONTRASEÑA: ---`;
+                }
+                contenedor.appendChild(div);
+            }
+        }
+
+        // Llamamos a la generación de espacios
+        generarEspacios('roblox-list', 'roblox');
+        generarEspacios('tiktok-list', 'otros');
+        generarEspacios('facebook-list', 'otros');
+        generarEspacios('instagram-list', 'otros');
+        generarEspacios('gmail-list', 'otros');
+        generarEspacios('otros-list', 'otros');
+
         function entrar() {
             var clave = document.getElementById("pass").value;
-            // TU CLAVE ACTUAL: 904369662
             if (clave === "904369662") { 
-                document.getElementById("login").style.display = "none";
-                document.getElementById("mi-boveda").style.display = "block";
+                document.getElementById("login").classList.add("oculto");
+                document.getElementById("dashboard").classList.remove("oculto");
             } else {
                 alert("¿No eres tú, onichan? Esa llave no abre mi interior... ❌");
             }
         }
 
-        // FUNCIÓN PARA EL ENTER
-        document.getElementById("pass").addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                entrar();
+        function mostrar(idSeccion) {
+            var secciones = document.getElementsByClassName("seccion-cuentas");
+            for (var i = 0; i < secciones.length; i++) {
+                secciones[i].classList.remove("visible");
             }
+            document.getElementById(idSeccion).classList.add("visible");
+        }
+
+        document.getElementById("pass").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") { entrar(); }
         });
     </script>
 </body>
