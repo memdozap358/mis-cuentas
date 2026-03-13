@@ -7,100 +7,28 @@
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            /* FONDO GEAR 5 - Link más estable */
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0;
             background: #000 url('https://images.alphacoders.com/129/1291196.png') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            overflow: hidden;
+            background-size: cover; color: white; overflow: hidden;
         }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: -1;
-        }
-
-        /* --- CONTENEDOR PRINCIPAL --- */
-        .card {
-            background: rgba(10, 10, 10, 0.9);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            border: 2px solid #ff0000; /* ROJO ELÉCTRICO */
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
-            box-sizing: border-box;
-        }
-
-        /* --- LOGIN CUADRADO --- */
-        #login-screen {
-            width: 350px;
-            height: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
+        body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: -1; }
+        .card { background: rgba(10, 10, 10, 0.9); padding: 30px; border-radius: 20px; text-align: center; border: 2px solid #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.6); box-sizing: border-box; }
+        #login-screen { width: 350px; height: 350px; display: flex; flex-direction: column; justify-content: center; }
         #login-screen h2 { color: #ff0000; text-shadow: 0 0 10px #ff0000; margin: 0; }
         #login-screen p { font-size: 0.85rem; color: #bbb; margin: 10px 0 20px 0; }
-
-        input {
-            width: 100%; padding: 12px; margin-bottom: 20px;
-            border-radius: 8px; border: 1px solid #444;
-            background: rgba(0, 0, 0, 0.8); color: #ff0000;
-            text-align: center; font-size: 1.1rem; font-weight: bold;
-            outline: none; box-sizing: border-box;
-        }
-
-        .main-btn { 
-            background: #ff0000; color: white; border: none; 
-            padding: 12px; border-radius: 8px; width: 100%; 
-            font-weight: bold; cursor: pointer; text-transform: uppercase;
-        }
-
-        /* --- DASHBOARD (Oculto al inicio) --- */
-        #dashboard-screen {
-            display: none; /* Esto evita que se vea al costado */
-            width: 95%;
-            max-width: 600px;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .menu-btn {
-            background: transparent; color: #ff0000;
-            border: 1px solid #ff0000; padding: 10px;
-            border-radius: 8px; cursor: pointer; font-weight: bold;
-            transition: 0.3s;
-        }
-
+        input { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: rgba(0, 0, 0, 0.8); color: #ff0000; text-align: center; font-size: 1.1rem; font-weight: bold; outline: none; box-sizing: border-box; }
+        .main-btn { background: #ff0000; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        #dashboard-screen { display: none; width: 95%; max-width: 650px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .menu-btn { background: transparent; color: #ff0000; border: 1px solid #ff0000; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.75rem; transition: 0.3s; }
         .menu-btn:hover { background: #ff0000; color: white; }
-
-        /* --- SECCIONES --- */
-        .seccion-cuentas { display: none; text-align: left; max-height: 40vh; overflow-y: auto; padding-right: 10px; }
+        .seccion-cuentas { display: none; text-align: left; max-height: 45vh; overflow-y: auto; padding-right: 10px; margin-top: 15px; }
         .visible { display: block; }
-
-        .dato-box {
-            background: rgba(30, 0, 0, 0.3);
-            padding: 12px; border-radius: 8px; margin-bottom: 8px;
-            border-left: 4px solid #ff0000; font-size: 0.85rem;
-        }
-
+        .dato-box { background: rgba(30, 0, 0, 0.4); padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #ff0000; font-size: 0.85rem; }
+        .dato-box strong { color: #ff0000; }
         .key-tag { color: #f1c40f; font-weight: bold; }
         .cerrar-btn { background: #660000; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer; margin-top: 20px;}
-
-        /* Scroll Rojo */
         .seccion-cuentas::-webkit-scrollbar { width: 4px; }
         .seccion-cuentas::-webkit-scrollbar-thumb { background: #ff0000; border-radius: 10px; }
     </style>
@@ -119,49 +47,79 @@
         <div class="menu-grid">
             <button class="menu-btn" onclick="mostrar('roblox')">🎮 ROBLOX</button>
             <button class="menu-btn" onclick="mostrar('tiktok')">📱 TIKTOK</button>
-            <button class="menu-btn" onclick="mostrar('facebook')">👥 FACEBOOK</button>
-            <button class="menu-btn" onclick="mostrar('instagram')">📸 INSTAGRAM</button>
+            <button class="menu-btn" onclick="mostrar('facebook')">👥 FB</button>
+            <button class="menu-btn" onclick="mostrar('instagram')">📸 INSTA</button>
             <button class="menu-btn" onclick="mostrar('gmail')">📧 GMAIL</button>
             <button class="menu-btn" onclick="mostrar('otros')">➕ OTROS</button>
         </div>
 
-        <div id="roblox" class="seccion-cuentas"><div id="roblox-list"></div></div>
-        <div id="tiktok" class="seccion-cuentas"><div id="tiktok-list"></div></div>
-        <div id="facebook" class="seccion-cuentas"><div id="facebook-list"></div></div>
-        <div id="instagram" class="seccion-cuentas"><div id="instagram-list"></div></div>
-        <div id="gmail" class="seccion-cuentas"><div id="gmail-list"></div></div>
-        <div id="otros" class="seccion-cuentas"><div id="otros-list"></div></div>
+        <div id="roblox" class="seccion-cuentas">
+            <h3 style="color:#ff0000">🎮 ROBLOX</h3>
+            <div class="dato-box"><strong>ACC 1:</strong> CORREO: --- | PASS: --- | <span class="key-tag">KEY: SI</span></div>
+            <div class="dato-box"><strong>ACC 2:</strong> CORREO: --- | PASS: --- | <span class="key-tag">KEY: NO</span></div>
+            <div id="roblox-list"></div> </div>
+
+        <div id="tiktok" class="seccion-cuentas">
+            <h3 style="color:#ff0000">📱 TIKTOK</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
+            <div class="dato-box"><strong>CUENTA 2:</strong> CORREO: --- | PASS: ---</div>
+            <div id="tiktok-list"></div>
+        </div>
+
+        <div id="facebook" class="seccion-cuentas">
+            <h3 style="color:#ff0000">👥 FACEBOOK</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
+            <div id="facebook-list"></div>
+        </div>
+
+        <div id="instagram" class="seccion-cuentas">
+            <h3 style="color:#ff0000">📸 INSTAGRAM</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
+            <div id="instagram-list"></div>
+        </div>
+
+        <div id="gmail" class="seccion-cuentas">
+            <h3 style="color:#ff0000">📧 GMAIL</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
+            <div id="gmail-list"></div>
+        </div>
+
+        <div id="otros" class="seccion-cuentas">
+            <h3 style="color:#ff0000">➕ OTROS</h3>
+            <div class="dato-box"><strong>CUENTA 1:</strong> CORREO: --- | PASS: ---</div>
+            <div id="otros-list"></div>
+        </div>
 
         <button class="cerrar-btn" onclick="location.reload()">CERRAR SESIÓN</button>
     </div>
 
     <script>
-        function generarEspacios(idPadre, tipo) {
+        // Generador automático de espacios restantes (hasta completar 30)
+        function rellenar(idPadre, tipo, inicial) {
             const contenedor = document.getElementById(idPadre);
-            for (let i = 1; i <= 30; i++) {
+            for (let i = inicial; i <= 30; i++) {
                 const div = document.createElement('div');
                 div.className = 'dato-box';
-                div.innerHTML = tipo === 'roblox' 
-                    ? `<strong>ACC ${i}:</strong> CORREOS: --- | CONTRASEÑA: --- | <span class="key-tag">KEY: NO</span>`
-                    : `<strong>CUENTA ${i}:</strong> CORREOS: --- | CONTRASEÑA: ---`;
+                div.innerHTML = (tipo === 'roblox') 
+                    ? `<strong>ACC ${i}:</strong> CORREO: --- | PASS: --- | <span class="key-tag">KEY: NO</span>`
+                    : `<strong>CUENTA ${i}:</strong> CORREO: --- | PASS: ---`;
                 contenedor.appendChild(div);
             }
         }
 
-        generarEspacios('roblox-list', 'roblox');
-        generarEspacios('tiktok-list', 'otros');
-        generarEspacios('facebook-list', 'otros');
-        generarEspacios('instagram-list', 'otros');
-        generarEspacios('gmail-list', 'otros');
-        generarEspacios('otros-list', 'otros');
+        // Se indica desde qué número empezar a rellenar automáticamente
+        rellenar('roblox-list', 'roblox', 3);
+        rellenar('tiktok-list', 'otros', 3);
+        rellenar('facebook-list', 'otros', 2);
+        rellenar('instagram-list', 'otros', 2);
+        rellenar('gmail-list', 'otros', 2);
+        rellenar('otros-list', 'otros', 2);
 
         function entrar() {
             if (document.getElementById("pass").value === "904369662") { 
                 document.getElementById("login-screen").style.display = "none";
                 document.getElementById("dashboard-screen").style.display = "block";
-            } else {
-                alert("Llave incorrecta, onichan... ❌");
-            }
+            } else { alert("Llave incorrecta, onichan... ❌"); }
         }
 
         function mostrar(id) {
